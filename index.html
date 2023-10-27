@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>GitHub Favorites</title>
   </head>
   <body>
@@ -10,40 +11,40 @@
       <header>
         <h1>GitHub Favorites</h1>
         <div id="github-search">
-          <label for="input-search">Usuário do gitHub</label>
+          <label class="sr-only" for="input-search">Usuário do gitHub</label>
           <input id="input-search type="text" placeholder="Usuário do Github">
           <button>&plus;</button>
         </div>
       </header>
+      <table>
+        <thead>
+          <tr>
+            <th>usuarios</th>
+            <th>Repositórios</th>
+            <th>Seguidores</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="user">
+              <img
+                src="https://avatars.githubusercontent.com/u/106702893?v=4"
+                alt="Imagem do Rafael Silva"
+              />
+              <a href="https://github.com/RafaelSilva2k22" target="_blank">
+                <p>Rafael Silva</p>
+                <span>Rafael Silva</span>
+              </a>
+            </td>
+            <td class="repositories">76</td>
+            <td class="followers">95</td>
+            <td>
+              <button>&times;</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>usuarios</th>
-          <th>Repositórios</th>
-          <th>Seguidores</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="user">
-            <img
-              src="https://avatars.githubusercontent.com/u/106702893?v=4"
-              alt="Imagem do Rafael Silva"
-            />
-            <a href="https://github.com/RafaelSilva2k22">
-              <p>Rafael Silva</p>
-              <span>Rafael Silva</span>
-            </a>
-          </td>
-          <td class="repositories">76</td>
-          <td class="followers">95</td>
-          <td>
-            <button>&times;</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </body>
 </html>
