@@ -8,6 +8,16 @@ export class FavoritesView extends Favorites {
   constructor(root) {
     super(root);
 
-    console.log(this.root);
+    this.update();
+  }
+
+  update() {
+    this.removeAllTr();
+  }
+  removeAllTr() {
+    const tbody = document.querySelector("table tbody");
+    tbody.querySelectorAll("tr").forEach((tr) => {
+      tr.remove();
+    });
   }
 }
