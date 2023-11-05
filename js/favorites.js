@@ -11,6 +11,12 @@ export class Favorites {
         public_repos: "76",
         followers: "125",
       },
+      {
+        login: "filipedeschamps",
+        name: "Filipe Deschamps",
+        public_repos: "255555",
+        followers: "99889",
+      },
     ];
   }
 }
