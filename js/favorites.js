@@ -3,21 +3,31 @@ export class Favorites {
     this.root = document.querySelector(root);
     this.load();
   }
+
   load() {
     this.users = [
       {
         login: "RafaelSilva2k22",
         name: "Rafael Silva",
         public_repos: "76",
-        followers: "125",
+        followers: 258,
       },
       {
         login: "filipedeschamps",
         name: "Filipe Deschamps",
         public_repos: "255555",
-        followers: "99889",
+        followers: 15,
       },
     ];
+  }
+
+  delete(entry) {
+    const filteredUsers = this.users.filter(
+      (user) => user.login !== entry.login
+    );
+
+    this.users = filteredUsers;
+    this.update();
   }
 }
 
@@ -29,6 +39,7 @@ export class FavoritesView extends Favorites {
 
     this.update();
   }
+
   update() {
     this.removeAllTr();
 
@@ -41,10 +52,16 @@ export class FavoritesView extends Favorites {
       row.querySelector(".user img").alt = `Imagem do ${user.name}`;
       row.querySelector(".user p").textContent = user.name;
       row.querySelector(".user span").textContent = user.login;
-      row.querySelector(".followers").textContent = user.followers;
       row.querySelector(".repositories").textContent = user.public_repos;
+      row.querySelector(".followers").textContent = user.followers;
+
+      row.querySelector("button.remove").addEventListener("click", () => {
+        this.delete(user);
+      });
 
       this.tbody.append(row);
+
+      console.log();
     });
   }
 
@@ -53,9 +70,7 @@ export class FavoritesView extends Favorites {
 
     tr.innerHTML = `
     <td class="user">
-      <img
-        src=""
-        alt=""/>
+      <img src="" alt=""/>
       <a href="" target="_blank" class="link_github">
         <p></p>
         <span></span>
