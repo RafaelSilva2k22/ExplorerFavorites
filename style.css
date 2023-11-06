@@ -126,6 +126,8 @@ td.user p {
 td .remove {
   background: none;
   border: none;
+
+  cursor: pointer;
 }
 .sr-only {
   position: absolute;
