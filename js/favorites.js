@@ -5,20 +5,8 @@ export class Favorites {
   }
 
   load() {
-    this.users = [
-      {
-        login: "RafaelSilva2k22",
-        name: "Rafael Silva",
-        public_repos: "76",
-        followers: 258,
-      },
-      {
-        login: "filipedeschamps",
-        name: "Filipe Deschamps",
-        public_repos: "255555",
-        followers: 15,
-      },
-    ];
+    this.users = JSON.parse(localStorage.getItem("@git-hub-favorites")) || [];
+    console.log(this.users);
   }
 
   delete(entry) {
