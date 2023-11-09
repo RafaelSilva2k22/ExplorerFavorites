@@ -1,3 +1,18 @@
+export class GithubUser {
+  static search(username) {
+    const endpoint = `https://api.github.com/users/${username}`;
+
+    return fetch(endpoint)
+      .then((data) => data.json())
+      .then(({ login, name, public_repos, followers }) => ({
+        login,
+        name,
+        public_repos,
+        followers,
+      }));
+  }
+}
+
 export class Favorites {
   constructor(root) {
     this.root = document.querySelector(root);
@@ -6,7 +21,10 @@ export class Favorites {
 
   load() {
     this.users = JSON.parse(localStorage.getItem("@git-hub-favorites")) || [];
-    console.log(this.users);
+  }
+  async add(username) {
+    const user = await GithubUser.search(username);
+    console.log(user);
   }
 
   delete(entry) {
@@ -26,6 +44,15 @@ export class FavoritesView extends Favorites {
     this.tbody = document.querySelector("table tbody");
 
     this.update();
+    this.onAdd();
+  }
+
+  onAdd() {
+    const addUser = this.root.querySelector("#github-search button");
+    addUser.addEventListener("click", () => {
+      const { value } = this.root.querySelector("#github-search input");
+      this.add(value);
+    });
   }
 
   update() {
