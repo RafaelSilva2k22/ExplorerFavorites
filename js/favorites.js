@@ -22,9 +22,28 @@ export class Favorites {
   load() {
     this.users = JSON.parse(localStorage.getItem("@git-hub-favorites")) || [];
   }
+
+  save() {
+    localStorage.setItem("@git-hub-favorites", JSON.stringify(this.users));
+  }
+
   async add(username) {
-    const user = await GithubUser.search(username);
-    console.log(user);
+    const userExist = this.users.find((user) => user.login === username);
+
+    if (userExist) {
+      throw new Error("Usuário já cadastrado");
+    }
+    try {
+      const user = await GithubUser.search(username);
+      if (user === undefined) {
+        throw new Error("Encontrei um erro!");
+      }
+      this.users = [user, ...this.users];
+      this.update();
+      this.save();
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   delete(entry) {
@@ -34,6 +53,7 @@ export class Favorites {
 
     this.users = filteredUsers;
     this.update();
+    this.save();
   }
 }
 
@@ -66,6 +86,7 @@ export class FavoritesView extends Favorites {
       ).src = `https://github.com/${user.login}.png`;
       row.querySelector(".user img").alt = `Imagem do ${user.name}`;
       row.querySelector(".user p").textContent = user.name;
+      row.querySelector(".user a").href = `https://github.com/${user.login}`;
       row.querySelector(".user span").textContent = user.login;
       row.querySelector(".repositories").textContent = user.public_repos;
       row.querySelector(".followers").textContent = user.followers;
@@ -75,8 +96,6 @@ export class FavoritesView extends Favorites {
       });
 
       this.tbody.append(row);
-
-      console.log();
     });
   }
 
